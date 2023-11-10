@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-public record UtenteDAO(
+public record UtenteDTO(
         @NotEmpty(message = "L'username è obbligatorio")
         @Size(min = 5, max = 15, message = "L'username deve avere tra i 5 e 15 caratteri")
         String username,
