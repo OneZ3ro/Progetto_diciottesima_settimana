@@ -10,7 +10,7 @@ public record DispositivoDTO(
         TipoDispositivo tipoDispositivo,
         @NotNull(message = "Lo stato del dispositivo è obbligatorio")
         StatoDispositivo statoDispositivo,
-        @NotNull(message = "L'utente è obbligatorio")
+
         int utenteId
 ) {
 }

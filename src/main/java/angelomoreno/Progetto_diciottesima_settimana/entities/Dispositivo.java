@@ -20,6 +20,6 @@ public class Dispositivo {
     @Enumerated(EnumType.STRING)
     private StatoDispositivo statoDispositivo;
     @ManyToOne
-    @JoinColumn(name = "utenti_id", nullable = false)
+    @JoinColumn(name = "utenti_id")
     private Utente utente;
 }

@@ -2,6 +2,7 @@ package angelomoreno.Progetto_diciottesima_settimana.services;
 
 import angelomoreno.Progetto_diciottesima_settimana.entities.Dispositivo;
 import angelomoreno.Progetto_diciottesima_settimana.entities.Utente;
+import angelomoreno.Progetto_diciottesima_settimana.enums.StatoDispositivo;
 import angelomoreno.Progetto_diciottesima_settimana.exceptions.BadRequestException;
 import angelomoreno.Progetto_diciottesima_settimana.exceptions.NotFoundException;
 import angelomoreno.Progetto_diciottesima_settimana.payloads.entities.DispositivoDTO;
@@ -32,8 +33,6 @@ public class DispositivoService {
         Dispositivo dispositivo = new Dispositivo();
         dispositivo.setTipoDispositivo(body.tipoDispositivo());
         dispositivo.setStatoDispositivo(body.statoDispositivo());
-        Utente app = utenteService.findById(body.utenteId());
-        dispositivo.setUtente(app);
         return dispositivoRepository.save(dispositivo);
     }
 
@@ -41,12 +40,17 @@ public class DispositivoService {
         return dispositivoRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
 
-    public Dispositivo modificaDispositivo(int id, DispositivoDTO body) throws NotFoundException {
+    public Dispositivo modificaDispositivo(int id, DispositivoDTO body) throws NotFoundException, BadRequestException {
         Dispositivo dispositivo = this.findById(id);
         dispositivo.setTipoDispositivo(body.tipoDispositivo());
         dispositivo.setStatoDispositivo(body.statoDispositivo());
-        Utente app = utenteService.findById(body.utenteId());
-        dispositivo.setUtente(app);
+        if (body.statoDispositivo().equals(StatoDispositivo.DISPONIBILE)) {
+            Utente app = utenteService.findById(body.utenteId());
+            dispositivo.setUtente(app);
+        } else {
+            throw new BadRequestException("Questo dispositivo al momento non può essere assegnato al momento. Riprova più tardi");
+        }
+
         return dispositivoRepository.save(dispositivo);
     }
 
