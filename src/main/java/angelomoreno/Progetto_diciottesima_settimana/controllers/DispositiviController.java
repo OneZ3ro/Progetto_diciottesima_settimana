@@ -45,6 +45,7 @@ public class DispositiviController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void eliminaDispositivo(@PathVariable int id) {
         dispositivoService.eliminaDispositivo(id);
     }
