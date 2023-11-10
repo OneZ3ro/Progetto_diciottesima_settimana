@@ -5,12 +5,15 @@ import angelomoreno.Progetto_diciottesima_settimana.exceptions.BadRequestExcepti
 import angelomoreno.Progetto_diciottesima_settimana.exceptions.NotFoundException;
 import angelomoreno.Progetto_diciottesima_settimana.payloads.entities.UtenteDTO;
 import angelomoreno.Progetto_diciottesima_settimana.repositories.UtenteRepository;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
@@ -18,6 +21,9 @@ import java.io.IOException;
 public class UtenteService {
     @Autowired
     private UtenteRepository utenteRepository;
+
+    @Autowired
+    private Cloudinary cloudinary;
 
     public Page<Utente> getUtenti (int page, int size, String orderBy) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(orderBy));
@@ -54,5 +60,9 @@ public class UtenteService {
 
     public void eliminaUtente(int id) throws NotFoundException {
         utenteRepository.deleteById(id);
+    }
+
+    public String uploadPicture(MultipartFile file) throws IOException {
+        return (String) cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
     }
 }

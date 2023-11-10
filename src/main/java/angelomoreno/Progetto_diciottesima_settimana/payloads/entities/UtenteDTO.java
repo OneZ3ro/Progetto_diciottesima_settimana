@@ -16,6 +16,6 @@ public record UtenteDTO(
         String cognome,
         @NotEmpty(message = "L'emmail è obbligatorio")
         @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "L'email inserita non è valida")
-        String email,
-        String urlImg
+        String email
+//        String urlImg
 ) {}
