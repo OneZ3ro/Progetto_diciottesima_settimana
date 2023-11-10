@@ -22,7 +22,7 @@ public class UtentiController {
     @GetMapping("")
     public Page<Utente> getUtenti (@RequestParam(defaultValue = "0") int page,
                                    @RequestParam(defaultValue = "10") int size,
-                                   @RequestParam(defaultValue = "id") String id
+                                   @RequestParam(defaultValue = "utenteId") String id
                                    ) {
         return utenteService.getUtenti(page, size, id);
     }

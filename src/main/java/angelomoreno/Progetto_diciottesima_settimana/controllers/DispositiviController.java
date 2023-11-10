@@ -20,7 +20,7 @@ public class DispositiviController {
     @GetMapping("")
     public Page<Dispositivo> getDispositivi (@RequestParam(defaultValue = "0") int page,
                                              @RequestParam(defaultValue = "10") int size,
-                                             @RequestParam(defaultValue = "id") String orderBy) {
+                                             @RequestParam(defaultValue = "dispositivoId") String orderBy) {
         return dispositivoService.getDispositivi(page, size, orderBy);
     }
 
