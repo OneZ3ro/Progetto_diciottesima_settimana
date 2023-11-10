@@ -47,7 +47,7 @@ public class UtentiController {
     }
 
     @PutMapping("/{id}")
-    public Utente modificaUtente(@PathVariable int id, @RequestBody @Validated UtenteDTO body) {
+    public Utente modificaUtente(@PathVariable int id, @RequestBody Utente body) {
         return utenteService.modificaUtente(id, body);
     }
 

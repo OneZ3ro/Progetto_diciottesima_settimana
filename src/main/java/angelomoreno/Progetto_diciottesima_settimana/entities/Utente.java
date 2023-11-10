@@ -1,5 +1,6 @@
 package angelomoreno.Progetto_diciottesima_settimana.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class Utente {
     private String cognome;
     private String email;
     @OneToMany(mappedBy = "utente")
+    @JsonIgnore
     private List<Dispositivo> dispositivi;
     @Column(name = "url_img")
     private String urlImg;

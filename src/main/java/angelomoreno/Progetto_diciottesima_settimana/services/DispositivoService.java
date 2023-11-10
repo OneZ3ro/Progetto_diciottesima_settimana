@@ -21,7 +21,7 @@ public class DispositivoService {
     @Autowired
     private DispositivoRepository dispositivoRepository;
     @Autowired
-    private UtenteRepository utenteRepository;
+    private UtenteService utenteService;
 
     public Page<Dispositivo> getDispositivi(int page, int size, String orderBy) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(orderBy));
@@ -32,7 +32,7 @@ public class DispositivoService {
         Dispositivo dispositivo = new Dispositivo();
         dispositivo.setTipoDispositivo(body.tipoDispositivo());
         dispositivo.setStatoDispositivo(body.statoDispositivo());
-        Utente app = utenteRepository.findById(body.utenteId()).orElseThrow(() -> new NotFoundException(body.utenteId()));
+        Utente app = utenteService.findById(body.utenteId());
         dispositivo.setUtente(app);
         return dispositivoRepository.save(dispositivo);
     }
@@ -45,7 +45,7 @@ public class DispositivoService {
         Dispositivo dispositivo = this.findById(id);
         dispositivo.setTipoDispositivo(body.tipoDispositivo());
         dispositivo.setStatoDispositivo(body.statoDispositivo());
-        Utente app = utenteRepository.findById(body.utenteId()).orElseThrow(() -> new NotFoundException(body.utenteId()));
+        Utente app = utenteService.findById(body.utenteId());
         dispositivo.setUtente(app);
         return dispositivoRepository.save(dispositivo);
     }

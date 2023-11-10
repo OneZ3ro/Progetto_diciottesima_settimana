@@ -42,13 +42,13 @@ public class UtenteService {
         return utenteRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
 
-    public Utente modificaUtente(int id, UtenteDTO body) throws NotFoundException {
+    public Utente modificaUtente(int id, Utente body) throws NotFoundException {
          Utente utente = this.findById(id);
-         utente.setUsername(body.username());
-         utente.setNome(body.nome());
-         utente.setCognome(body.cognome());
-         utente.setEmail(body.email());
-         utente.setUrlImg("https://ui-avatars.com/api/?name=" + body.nome() + "+" + body.cognome());
+         utente.setUsername(body.getUsername());
+         utente.setNome(body.getNome());
+         utente.setCognome(body.getCognome());
+         utente.setEmail(body.getEmail());
+         utente.setUrlImg("https://ui-avatars.com/api/?name=" + body.getNome() + "+" + body.getCognome());
          return utenteRepository.save(utente);
     }
 
