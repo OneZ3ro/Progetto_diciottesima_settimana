@@ -26,7 +26,7 @@ public class UtentiController {
                                    ) {
         return utenteService.getUtenti(page, size, id);
     }
-    
+
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public Utente saveUtente(@RequestBody @Validated UtenteDTO body, BindingResult validation) {
@@ -47,8 +47,7 @@ public class UtentiController {
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Utente modificaUtente(@PathVariable int id, @RequestBody UtenteDTO body) {
+    public Utente modificaUtente(@PathVariable int id, @RequestBody @Validated UtenteDTO body) {
         return utenteService.modificaUtente(id, body);
     }
 
